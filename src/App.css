@@ -1,0 +1,1997 @@
+.container {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+/* same outline pill as .hero__tag, just without its pulsing dot */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+.section-head {
+  margin-bottom: 64px;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 40px;
+  }
+}
+
+.section-title {
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  color: var(--text-h);
+  margin: 0 0 24px;
+  max-width: 700px;
+
+  @media (max-width: 1024px) {
+    font-size: 30px;
+  }
+}
+
+.section-lead {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* Header */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 16px 32px;
+
+  @media (max-width: 1024px) {
+    padding: 12px 16px;
+  }
+}
+
+.site-header__bar {
+  max-width: 1152px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 10px 12px 10px 24px;
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.12);
+}
+
+.site-header__logo {
+  height: 22px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  a {
+    padding: 8px 14px;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--text-h);
+    }
+  }
+
+  /* mobile: stacked full-width list inside the burger dropdown */
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    a {
+      padding: 12px 4px;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+
+  /* mobile: stacked below the nav list inside the dropdown */
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 12px;
+
+    .call-btn {
+      justify-content: center;
+    }
+  }
+}
+
+/* desktop: nav + lang/CTA sit inline as one right-aligned cluster */
+.site-header__menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-header__menu-inner {
+  display: contents;
+}
+
+/* mobile: collapses into an animated dropdown card below the header pill */
+@media (max-width: 1024px) {
+  .site-header__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+      grid-template-rows 0.35s ease,
+      visibility 0s linear 0.35s;
+  }
+
+  .site-header__menu[data-state='open'] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition: grid-template-rows 0.35s ease;
+  }
+
+  .site-header__menu-inner {
+    display: block;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 8px 16px;
+    box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* burger toggle: hidden on desktop, shown only under the mobile breakpoint */
+.site-header__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: var(--accent-bg);
+  }
+
+  @media (max-width: 1024px) {
+    display: flex;
+  }
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.lang-switch__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-switch__sep {
+  color: rgba(26, 26, 26, 0.25);
+}
+
+.lang-switch__btn {
+  border: none;
+  background: none;
+  padding: 4px 4px;
+  cursor: pointer;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--text-h);
+  }
+}
+
+.lang-switch__btn--active {
+  color: var(--text-h);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.call-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text-h);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: var(--accent);
+    color: var(--text-h);
+    transform: translateY(-1px);
+  }
+}
+
+/* Hero */
+
+/* the gradient bleeds well above the section itself (via ::before, not a DOM wrapper) so it
+   shows through the sticky header's translucent pill without changing the header's own
+   containing block — nesting the header inside a short wrapper would break its stickiness
+   past that wrapper's height */
+.hero {
+  padding: 0;
+  position: relative;
+  /* establishes a stacking context so ::before's z-index:-1 stays scoped to .hero's own
+     children instead of escaping to the document root and painting behind other sections */
+  z-index: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 0;
+    right: 0;
+    height: calc(100% + 200px);
+    background: linear-gradient(165deg, var(--accent-bg) 0%, var(--surface) 65%);
+    z-index: -1;
+  }
+}
+
+.hero__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  min-height: 700px;
+  flex-wrap: wrap;
+
+  @media (max-width: 1024px) {
+    padding: 48px 20px;
+    min-height: 0;
+  }
+}
+
+.hero__content {
+  flex: 1;
+  min-width: 320px;
+  max-width: 520px;
+}
+
+.hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.hero__tag-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: hero-tag-pulse 2s ease-in-out infinite;
+}
+
+@keyframes hero-tag-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.hero__title {
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+  margin: 0 0 24px;
+
+  @media (max-width: 1024px) {
+    font-size: 38px;
+  }
+}
+
+.hero__title-name {
+  display: block;
+  width: fit-content;
+  font-weight: 500;
+  color: var(--text-h);
+  margin-top: 4px;
+}
+
+.hero__lead {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  max-width: 420px;
+  margin: 0 0 36px;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text-h);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: var(--accent);
+    color: var(--text-h);
+  }
+}
+
+.hero__media {
+  flex: 1;
+  min-width: 320px;
+  max-width: 520px;
+  position: relative;
+}
+
+.hero__photo {
+  position: relative;
+}
+
+.hero__photo-frame {
+  border-radius: 30px;
+  height: 560px;
+  width: 100%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1024px) {
+    height: 400px;
+  }
+}
+
+/* decorative circular badges "stuck" on the photo's edge, like stickers */
+.hero__sticker {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px -2px rgba(31, 31, 31, 0.18);
+  z-index: 2;
+
+  @media (max-width: 1024px) {
+    width: 48px;
+    height: 48px;
+    border-width: 3px;
+  }
+}
+
+.hero__sticker--heart {
+  top: -18px;
+  right: 32px;
+  background: #8ecbf0;
+  transform: rotate(-8deg);
+}
+
+.hero__sticker--smile {
+  bottom: 48px;
+  left: -18px;
+  background: #fbbb0d;
+  transform: rotate(6deg);
+}
+
+.hero__sticker--star {
+  bottom: -16px;
+  right: 72px;
+  background: #e29dc5;
+  transform: rotate(-6deg);
+}
+
+.hero__caption {
+  text-align: center;
+  margin-top: 24px;
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text);
+}
+
+/* About */
+
+.about {
+  background: var(--surface);
+  padding: 96px 0;
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.about__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.about__text {
+  flex: 1;
+  min-width: 280px;
+}
+
+/* outline pill instead of a filled panel, same recipe as .hero__tag */
+.about__note {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 20px;
+  margin-top: 24px;
+}
+
+/* stuck on crooked like a sticker, hanging off the card's top-right corner — same
+   white-ring treatment as .hero__sticker / .how__badge */
+.about__note-icon {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background: #ef7928;
+  border: 3px solid #fff;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px -2px rgba(31, 31, 31, 0.18);
+  transform: rotate(-14deg);
+  flex-shrink: 0;
+}
+
+.about__note-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin: 0 0 6px;
+}
+
+.about__note-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.about__list-wrap {
+  flex: 1.3;
+  min-width: 320px;
+  position: relative;
+  max-height: 464px;
+}
+
+.about__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 464px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: none;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black 40px,
+    black calc(100% - 40px),
+    transparent 100%
+  );
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* outline pill instead of a filled row, same recipe as .hero__tag */
+.about__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  flex-shrink: 0;
+
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
+/* How I Work */
+
+/* same soft fade as .hero, fully to var(--surface) so it matches the white sections around it */
+.how {
+  padding: 96px 0;
+  background: linear-gradient(165deg, var(--accent-bg) 0%, var(--surface) 65%);
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.how__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.how__badges {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* same "sticker" treatment as .hero__sticker: solid color, thick white ring, drop shadow */
+.how__badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px -2px rgba(31, 31, 31, 0.18);
+  color: #fff;
+}
+
+.how__badge--lavender {
+  background: #e29dc5;
+  transform: rotate(-6deg);
+}
+
+.how__badge--mint {
+  background: #71bd85;
+  margin-left: -6px;
+  transform: rotate(6deg);
+}
+
+.how__accordion {
+  border-top: 1px solid var(--border);
+}
+
+.how__row {
+  border-bottom: 1px solid var(--border);
+}
+
+.how__row-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 28px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.how__row-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.how__row-title {
+  flex: 1;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-h);
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .how__row-head:hover .how__row-title {
+    color: var(--accent-hover);
+  }
+}
+
+.how__row-chevron {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-h);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.how__row-head[data-state='open'] .how__row-chevron {
+  background: var(--text-h);
+  color: #fff;
+  transform: rotate(180deg);
+}
+
+.how__row-content {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.25s ease-out;
+
+  &[data-state='open'] {
+    height: var(--radix-accordion-content-height);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.how__row-body {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 0 0 32px;
+  flex-wrap: wrap;
+}
+
+.how__row-text {
+  flex: 1;
+  min-width: 240px;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.how__row-media {
+  flex-shrink: 0;
+  width: 220px;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* Experience */
+
+.experience {
+  background: var(--surface);
+  padding: 96px 0;
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.experience__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.experience__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* same row rhythm as .education__item: divider line + generous vertical padding */
+.experience__item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.experience__item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.experience__item-title {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.experience__item-desc {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0;
+}
+
+/* same treatment as .education__year: plain colored number, no pill */
+.experience__badge {
+  font-size: 44px;
+  font-weight: 500;
+  color: var(--accent-bg);
+  width: 110px;
+  flex-shrink: 0;
+}
+
+/* "show more" toggle: same secondary-pill look as .process__row-cta / .services__detail-cta */
+/* also used by .education__more — same "show more" toggle, different section */
+.experience__more,
+.education__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  background: transparent;
+  color: var(--text-h);
+  border: 1.5px solid var(--border);
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 8px auto 0;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+  }
+}
+
+/* nudges toward the icon bouncing gently, hinting there's more to reveal below */
+.experience__more-icon,
+.education__more-icon {
+  animation: experience-more-bounce 1.6s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+/* collapsed state: chevron flips upright, no more bounce hint since there's nothing left below to reveal */
+.experience__more-icon--up,
+.education__more-icon--up {
+  animation: none;
+  transform: rotate(180deg);
+}
+
+@keyframes experience-more-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.experience__note {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  margin-top: 24px;
+}
+
+/* Education */
+
+.education {
+  padding: 96px 0;
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.education__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+/* no horizontal padding: the title/button columns line up with .education__item below via the same spacer+flex structure */
+.education__highlight {
+  position: relative;
+  border-radius: 30px;
+  padding: 32px 0;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* same 60px / 4px-ring size as .hero__sticker */
+.education__highlight-sticker {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 9999px;
+  background: #a78bfa;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px -2px rgba(31, 31, 31, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(10deg);
+  flex-shrink: 0;
+
+  /* back in normal flow as its own row above the title — absolute positioning here would
+     float on top of the title text once the layout stacks to a single column */
+  @media (max-width: 1024px) {
+    position: static;
+    margin-bottom: 4px;
+  }
+}
+
+/* invisible column matching .education__year's width, so the highlight title aligns with item titles */
+.education__year--spacer {
+  visibility: hidden;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.education__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.education__item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.education__item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* same pale tint as .education__view-btn's fill, so the year reads as lighter/secondary */
+.education__year {
+  font-size: 44px;
+  font-weight: 500;
+  color: var(--accent-bg);
+  width: 110px;
+  flex-shrink: 0;
+}
+
+.education__item-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.education__item-desc {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0;
+}
+
+/* "Посмотреть" trigger: shared by the highlight card and each timeline row, opens the diploma-photo dialog */
+.education__view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  background: var(--accent-bg);
+  color: var(--text-h);
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: var(--accent);
+  }
+
+  @media (max-width: 1024px) {
+    align-self: flex-start;
+  }
+}
+
+/* Services */
+
+.services {
+  background: var(--surface);
+  padding: 96px 0;
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.services__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.services__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+
+.services__layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.services__list {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.services__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+
+  &:hover {
+    background: color-mix(in srgb, var(--neutral) 22%, white);
+    transform: translateY(-1px);
+  }
+}
+
+.services__row--active {
+  background: color-mix(in srgb, var(--neutral) 45%, white);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    background: color-mix(in srgb, var(--neutral) 60%, white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.services__row-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.services__row-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--text-h);
+}
+
+.services__row-dur {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0;
+}
+
+/* fixed width + left-aligned text so every price starts at the same x, regardless of
+   how wide the number/word is (e.g. "40 €" vs "Kostenlos") */
+.services__row-price {
+  margin-left: auto;
+  width: 128px;
+  flex-shrink: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.services__row-price-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.services__row-price-unit {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.services__detail {
+  flex: 1.1;
+  min-width: 320px;
+  background: var(--accent-bg);
+  border-radius: 24px;
+  padding: 24px;
+  color: var(--text-h);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: services-detail-in 0.25s ease;
+
+  h3 {
+    font-size: 23px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-h);
+  }
+}
+
+@keyframes services-detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.services__detail-desc {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+.services__detail-card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 24px;
+  color: var(--text-h);
+}
+
+.services__detail-price {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.services__detail-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+  }
+}
+
+.services__detail-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* same primary look as .hero__cta: black by default, lavender on hover */
+.services__detail-cta {
+  background: var(--text-h);
+  color: #fff;
+  border-radius: 14px;
+  padding: 12px 32px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: var(--accent);
+    color: var(--text-h);
+  }
+}
+
+.currency-switch {
+  display: flex;
+  gap: 4px;
+  background: var(--bg);
+  border-radius: 9999px;
+  padding: 4px;
+}
+
+.currency-switch__btn {
+  border: none;
+  background: none;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text);
+  font-family: inherit;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  &[data-state='on'] {
+    color: #fff;
+    background: var(--text-h);
+  }
+}
+
+/* Process */
+
+.process {
+  padding: 96px 0;
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.process__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.process__layout {
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.process__photos {
+  position: relative;
+  width: 312px;
+  height: 408px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    width: 264px;
+    height: 336px;
+  }
+}
+
+.process__photo-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 16px 32px -12px rgba(26, 26, 26, 0.3);
+  transition:
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.process__accordion {
+  flex: 1;
+  min-width: 300px;
+  border-top: 1px solid var(--border);
+}
+
+.process__row {
+  border-bottom: 1px solid var(--border);
+}
+
+.process__row-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 28px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.process__row-n {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.process__row-title {
+  flex: 1;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-h);
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .process__row-head:hover .process__row-title {
+    color: var(--accent-hover);
+  }
+}
+
+.process__row-chevron {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-h);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.process__row-head[data-state='open'] .process__row-chevron {
+  background: var(--text-h);
+  color: #fff;
+  transform: rotate(180deg);
+}
+
+.process__row-content {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.25s ease-out;
+
+  &[data-state='open'] {
+    height: var(--radix-accordion-content-height);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.process__row-body {
+  padding: 0 0 32px;
+  max-width: 560px;
+
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0 0 20px;
+  }
+}
+
+/* same primary look as .hero__cta: black by default, lavender on hover */
+.process__row-cta {
+  display: inline-flex;
+  align-items: center;
+  background: var(--text-h);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: var(--accent);
+    color: var(--text-h);
+  }
+}
+
+/* Testimonials */
+
+.testimonials {
+  background: var(--accent-bg);
+  padding: 96px 0;
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.testimonials__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.testimonials__grid {
+  columns: 3;
+  column-gap: 20px;
+  column-fill: balance;
+
+  @media (max-width: 1024px) {
+    columns: 1;
+  }
+}
+
+/* no transform on hover: a translateY inside a CSS-columns masonry shifts the card under
+   the cursor and re-triggers mouseenter/mouseleave, which read as flicker */
+.testimonial-card {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 24px;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.testimonial-card__quote {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.testimonial-card__text {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.testimonial-card__author {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0;
+}
+
+/* video testimonial: portrait card, video fills it, inline play (no lightbox) */
+.testimonial-video {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  border-radius: 24px;
+  position: relative;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  overflow: hidden;
+  background: var(--text-h);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.testimonial-video__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* clickable poster state: name/role bottom-left, glass play pill bottom-right */
+.testimonial-video__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  transition: background 0.2s ease;
+
+  &:hover .testimonial-video__play {
+    transform: scale(1.06);
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.testimonial-video__caption {
+  text-align: left;
+  color: #fff;
+
+  p {
+    margin: 0;
+
+    &:first-child {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    &:last-child {
+      font-size: 14px;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+  }
+}
+
+/* glass-effect pill play button (backdrop-blur, translucent white) */
+.testimonial-video__play {
+  flex-shrink: 0;
+  width: 68px;
+  height: 52px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.3s ease,
+    background 0.2s ease;
+}
+
+/* FAQ */
+
+.faq {
+  padding: 96px 0;
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.faq__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.faq__item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 30px;
+  margin-bottom: 16px;
+}
+
+.faq__item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: inherit;
+    margin: 0;
+  }
+}
+
+.faq__item-answer {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.25s ease-out;
+
+  &[data-state='open'] {
+    height: var(--radix-accordion-content-height);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.faq__item-answer-inner {
+  padding-top: 20px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.faq__toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  background: var(--text-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.faq__item-head[data-state='open'] .faq__toggle {
+  transform: rotate(45deg);
+}
+
+/* Contact */
+
+/* soft full-bleed wash behind the white card, so it reads as one framed panel */
+/* fades into the lavender that .site-footer picks up where this leaves off, so the two
+   sections read as one continuous wash instead of a flat tinted block */
+/* NOTE: this section sits directly after .faq in normal flow (unlike .hero, which is the very
+   first thing on the page) — bleeding the gradient upward via ::before painted over .faq's own
+   text, since .contact comes after it in DOM order. Plain background only, no bleed. */
+.contact {
+  padding: 96px 0;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--accent-bg) 100%);
+
+  @media (max-width: 1024px) {
+    padding: 56px 0;
+  }
+}
+
+.contact__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.contact__card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @media (max-width: 1024px) {
+    padding: 32px 24px;
+  }
+}
+
+/* same 60px / 4px-ring size as .hero__sticker, stuck crooked on the card's top-right corner */
+.contact__stickers {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  display: flex;
+}
+
+.contact__sticker {
+  width: 60px;
+  height: 60px;
+  border-radius: 9999px;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px -2px rgba(31, 31, 31, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact__sticker--pink {
+  background: #e29dc5;
+  transform: rotate(-10deg);
+}
+
+.contact__sticker--blue {
+  background: #8ecbf0;
+  margin-left: -10px;
+  transform: rotate(12deg);
+}
+
+.contact__title {
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  margin: 0 0 16px;
+  color: var(--text-h);
+
+  @media (max-width: 1024px) {
+    font-size: 28px;
+  }
+}
+
+.contact__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.contact__cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text-h);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: var(--accent);
+    color: var(--text-h);
+  }
+}
+
+/* social row: Telegram / Instagram / phone-call circles, secondary weight (tinted bg, dark icon) vs. the primary black CTA */
+.contact__social {
+  display: flex;
+  gap: 0;
+  margin-top: 24px;
+}
+
+.contact__social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: transparent;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover {
+    background: var(--accent);
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+.contact__info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* same outline-card treatment as .about__note, icon as a corner sticker instead of inline */
+.contact__info-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: none;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 2px;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    margin: 0;
+  }
+}
+
+/* same size/position/ring as .about__note-icon: a crooked sticker on the card's top-right corner */
+.contact__info-icon {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px -2px rgba(31, 31, 31, 0.18);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact__info-icon--teal {
+  background: #38bdf8;
+  transform: rotate(-14deg);
+}
+
+.contact__info-icon--purple {
+  background: #a78bfa;
+  transform: rotate(10deg);
+}
+
+.contact__info-icon--orange {
+  background: #fb923c;
+  transform: rotate(-8deg);
+}
+
+/* Footer */
+
+/* continues .contact's gradient from the same lavender tone back down to white */
+.site-footer {
+  background: linear-gradient(180deg, var(--accent-bg) 0%, var(--surface) 100%);
+  padding: 40px 0;
+}
+
+.site-footer__inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+  }
+}
+
+.site-footer__nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 24px;
+
+  a {
+    color: var(--text);
+  }
+}
+
+.site-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text);
+
+  p {
+    margin: 0;
+  }
+}
+
+/* Floating call button */
+
+.floating-call {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background: var(--text-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  box-shadow: 0 4px 14px rgba(151, 194, 236, 0.5);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Scroll reveal */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
