@@ -25,3 +25,4 @@ dist-ssr
 
 # Large source archive, not part of the buildable project
 *.zip
+.vercel

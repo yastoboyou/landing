@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import logo from '../assets/logo.svg'
-import { languages, phone, translations, whatsappUrl, type Lang } from '../i18n/content'
+import { languages, phone, translations, type Lang } from '../i18n/content'
 
 interface HeaderProps {
   lang: Lang
@@ -11,10 +11,24 @@ interface HeaderProps {
 export function Header({ lang, onLangChange }: HeaderProps) {
   const t = translations[lang]
   const [open, setOpen] = useState(false)
+  const barRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+
+    function onPointerDown(e: PointerEvent) {
+      if (barRef.current && !barRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => document.removeEventListener('pointerdown', onPointerDown)
+  }, [open])
 
   return (
     <div className="site-header">
-      <div className="site-header__bar">
+      <div className="site-header__bar" ref={barRef}>
         <img src={logo} alt="Рамина Колбая" className="site-header__logo" />
         <div className="site-header__menu" data-state={open ? 'open' : 'closed'}>
           <div className="site-header__menu-inner">
@@ -52,11 +66,9 @@ export function Header({ lang, onLangChange }: HeaderProps) {
                 ))}
               </div>
               <a
-                href={whatsappUrl}
+                href={`tel:${phone}`}
                 className="call-btn"
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`${t.ctaWhatsapp}: ${phone}`}
+                aria-label={`${t.callBtn}: ${phone}`}
                 onClick={() => setOpen(false)}
               >
                 {phone}

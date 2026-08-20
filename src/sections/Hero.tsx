@@ -1,6 +1,6 @@
 import { ArrowRight, Heart, Smile, Star } from 'lucide-react'
-import heroPortrait from '../assets/ramina-portrait.png'
-import { translations, type Lang } from '../i18n/content'
+import heroPortrait from '../assets/ramina-portrait.jpg'
+import { translations, whatsappUrl, type Lang } from '../i18n/content'
 
 interface HeroProps {
   lang: Lang
@@ -21,7 +21,7 @@ export function Hero({ lang }: HeroProps) {
             {t.heroTitle} <span className="hero__title-name">{t.heroName}</span>
           </h1>
           <p className="hero__lead">{t.heroLead}</p>
-          <a href="#contact" className="hero__cta">
+          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="hero__cta">
             {t.heroCta}
             <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
           </a>

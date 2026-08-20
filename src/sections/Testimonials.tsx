@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Play, Quote } from 'lucide-react'
 import { testimonialOrder, testimonials, translations, type Lang } from '../i18n/content'
 
@@ -13,6 +13,14 @@ export function Testimonials({ lang }: TestimonialsProps) {
   const testi = testimonials[lang]
   const [videoPlaying, setVideoPlaying] = useState(false)
   const videoName = t.heroName.split(' ')[0]
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // keep the caption track off while the poster is showing — it should only kick in once
+  // playback actually starts, not sit visible over the cover image beforehand
+  useEffect(() => {
+    const track = videoRef.current?.textTracks[0]
+    if (track) track.mode = videoPlaying ? 'showing' : 'hidden'
+  }, [videoPlaying, lang])
 
   return (
     <section id="testimonials" className="testimonials">
@@ -38,6 +46,7 @@ export function Testimonials({ lang }: TestimonialsProps) {
           ))}
           <div className="testimonial-video">
             <video
+              ref={videoRef}
               className="testimonial-video__media"
               src="/video/ramina-testimonial.mp4"
               poster="/video/ramina-testimonial-poster.jpg"
@@ -53,17 +62,15 @@ export function Testimonials({ lang }: TestimonialsProps) {
                 src={`/video/ramina-testimonial-${lang}.vtt`}
                 srcLang={lang}
                 label={subtitleLabel[lang]}
-                default
               />
             </video>
             {!videoPlaying && (
               <button
                 type="button"
                 className="testimonial-video__overlay"
-                onClick={(e) => {
+                onClick={() => {
                   setVideoPlaying(true)
-                  const video = e.currentTarget.previousElementSibling as HTMLVideoElement
-                  video.play()
+                  videoRef.current?.play()
                 }}
                 aria-label={`${t.testiPlayLabel} — ${videoName}, ${t.heroTitle}`}
               >

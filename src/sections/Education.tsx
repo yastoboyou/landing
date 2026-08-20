@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Collapsible } from 'radix-ui'
 import { ArrowUpRight, ChevronDown, GraduationCap } from 'lucide-react'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { eduList, translations, type Lang } from '../i18n/content'
@@ -50,7 +51,8 @@ export function Education({ lang }: EducationProps) {
   const items = eduList[lang]
   const [activePhotos, setActivePhotos] = useState<string[] | null>(null)
   const [expanded, setExpanded] = useState(false)
-  const visibleItems = expanded ? items : items.slice(0, COLLAPSED_COUNT)
+  const alwaysVisible = items.slice(0, COLLAPSED_COUNT)
+  const rest = items.slice(COLLAPSED_COUNT)
 
   return (
     <section id="education" className="education">
@@ -76,27 +78,55 @@ export function Education({ lang }: EducationProps) {
             </button>
           )}
         </div>
-        <div className="education__list">
-          {visibleItems.map((item, i) => {
-            const group = eduPhotosByIndex.get(i + 1)?.map((p) => p.src)
+        <Collapsible.Root open={expanded} onOpenChange={setExpanded}>
+          <div className="education__list">
+            {alwaysVisible.map((item, i) => {
+              const group = eduPhotosByIndex.get(i + 1)?.map((p) => p.src)
 
-            return (
-              <div className="education__item" key={i}>
-                <div className="education__year">{item.year}</div>
-                <div className="education__item-body">
-                  <h3 className="education__item-title">{item.title}</h3>
-                  <p className="education__item-desc">{item.desc}</p>
+              return (
+                <div className="education__item" key={i}>
+                  <div className="education__year">{item.year}</div>
+                  <div className="education__item-body">
+                    <h3 className="education__item-title">{item.title}</h3>
+                    <p className="education__item-desc">{item.desc}</p>
+                  </div>
+                  {group && group.length > 0 && (
+                    <button type="button" className="education__view-btn" onClick={() => setActivePhotos(group)}>
+                      {t.eduViewLabel}
+                      <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
+                    </button>
+                  )}
                 </div>
-                {group && group.length > 0 && (
-                  <button type="button" className="education__view-btn" onClick={() => setActivePhotos(group)}>
-                    {t.eduViewLabel}
-                    <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
-                  </button>
-                )}
+              )
+            })}
+          </div>
+          {rest.length > 0 && (
+            <Collapsible.Content className="education__collapsible">
+              <div className="education__list">
+                {rest.map((item, i) => {
+                  const originalIndex = COLLAPSED_COUNT + i
+                  const group = eduPhotosByIndex.get(originalIndex + 1)?.map((p) => p.src)
+
+                  return (
+                    <div className="education__item" key={originalIndex}>
+                      <div className="education__year">{item.year}</div>
+                      <div className="education__item-body">
+                        <h3 className="education__item-title">{item.title}</h3>
+                        <p className="education__item-desc">{item.desc}</p>
+                      </div>
+                      {group && group.length > 0 && (
+                        <button type="button" className="education__view-btn" onClick={() => setActivePhotos(group)}>
+                          {t.eduViewLabel}
+                          <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
+                        </button>
+                      )}
+                    </div>
+                  )
+                })}
               </div>
-            )
-          })}
-        </div>
+            </Collapsible.Content>
+          )}
+        </Collapsible.Root>
         {items.length > COLLAPSED_COUNT && (
           <button type="button" className="education__more" onClick={() => setExpanded((v) => !v)}>
             {expanded ? t.eduShowLess : t.eduShowMore}

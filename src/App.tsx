@@ -20,18 +20,25 @@ function App() {
 
   return (
     <>
+      {/* Header and Hero sit outside this clip: Header because position: sticky breaks in
+          WebKit if any ancestor up to the root clips overflow, and Hero because its gradient
+          ::before deliberately bleeds upward past its own box to show through the sticky
+          header's translucent pill — clipping it here would cut that off. Hero's own horizontal
+          overflow (the stickers) is clipped locally instead, see .hero__inner. */}
       <Header lang={lang} onLangChange={setLang} />
       <Hero lang={lang} />
-      <About lang={lang} />
-      <HowIWork lang={lang} />
-      <Experience lang={lang} />
-      <Education lang={lang} />
-      <Services lang={lang} />
-      <Process lang={lang} />
-      <Testimonials lang={lang} />
-      <Faq lang={lang} />
-      <Contact lang={lang} />
-      <Footer lang={lang} />
+      <div className="page-clip">
+        <About lang={lang} />
+        <HowIWork lang={lang} />
+        <Experience lang={lang} />
+        <Education lang={lang} />
+        <Services lang={lang} />
+        <Process lang={lang} />
+        <Testimonials lang={lang} />
+        <Faq lang={lang} />
+        <Contact lang={lang} />
+        <Footer lang={lang} />
+      </div>
       <FloatingCallButton />
     </>
   )

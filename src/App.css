@@ -8,6 +8,12 @@
   }
 }
 
+/* clips decorative elements (e.g. the hero stickers) that bleed past the viewport on narrow
+   screens — kept off the sticky header itself, see the comment in App.tsx */
+.page-clip {
+  overflow-x: hidden;
+}
+
 /* same outline pill as .hero__tag, just without its pulsing dot */
 .badge {
   display: inline-flex;
@@ -158,16 +164,21 @@
     right: 0;
     display: grid;
     grid-template-rows: 0fr;
+    opacity: 0;
     visibility: hidden;
     transition:
       grid-template-rows 0.35s ease,
+      opacity 0.25s ease,
       visibility 0s linear 0.35s;
   }
 
   .site-header__menu[data-state='open'] {
     grid-template-rows: 1fr;
+    opacity: 1;
     visibility: visible;
-    transition: grid-template-rows 0.35s ease;
+    transition:
+      grid-template-rows 0.35s ease,
+      opacity 0.3s ease;
   }
 
   .site-header__menu-inner {
@@ -302,6 +313,10 @@
   gap: 48px;
   min-height: 700px;
   flex-wrap: wrap;
+  /* clips the -18px sticker bleed (see .hero__sticker--smile) so it can't cause horizontal
+     scroll on narrow screens — scoped here rather than on .hero itself so it doesn't also clip
+     .hero::before's intentional upward bleed behind the sticky header */
+  overflow-x: hidden;
 
   @media (max-width: 1024px) {
     padding: 48px 20px;
@@ -799,6 +814,25 @@
   flex-direction: column;
 }
 
+/* "show more" reveal for the collapsed tail of the Experience/Education lists — same
+   height-transition recipe as .how__row-content / .process__row-content / .faq__item-answer,
+   just driven by Collapsible instead of Accordion, so every expand/collapse on the site animates
+   identically */
+.experience__collapsible,
+.education__collapsible {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.25s ease-out;
+
+  &[data-state='open'] {
+    height: var(--radix-collapsible-content-height);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
 /* same row rhythm as .education__item: divider line + generous vertical padding */
 .experience__item {
   display: flex;
@@ -854,18 +888,21 @@
   color: var(--text-h);
   border: 1.5px solid var(--border);
   border-radius: 9999px;
-  padding: 10px 24px;
+  padding: 7px 16px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
+  opacity: 0.8;
   margin: 8px auto 0;
   transition:
     border-color 0.2s ease,
-    background 0.2s ease;
+    background 0.2s ease,
+    opacity 0.2s ease;
 
   &:hover {
     border-color: var(--accent);
     background: var(--accent-bg);
+    opacity: 1;
   }
 }
 
@@ -1090,6 +1127,15 @@
   gap: 16px;
 }
 
+/* wraps each row together with its own inline detail card on mobile (see .services__detail's
+   @media block below) — on desktop the detail card lives outside this wrapper instead, so the
+   gap here only ever shows up between a mobile row and its own expanded card */
+.services__row-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .services__row {
   display: flex;
   align-items: center;
@@ -1150,6 +1196,12 @@
   flex-shrink: 0;
   text-align: left;
   white-space: nowrap;
+
+  /* on mobile there's no second column to line prices up with, so hug the card's own
+     right edge instead of the desktop table-column alignment above */
+  @media (max-width: 1024px) {
+    text-align: right;
+  }
 }
 
 .services__row-price-value {

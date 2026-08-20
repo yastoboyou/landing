@@ -45,6 +45,8 @@ export interface TranslationStrings {
   servicesBadge: string
   servicesTitle: string
   servicesLead: string
+  servicesCta: string
+  servicesCtaMore: string
   free: string
   processBadge: string
   processTitle: string
@@ -98,6 +100,9 @@ export interface ServiceEntry {
   unit: string
   desc: string
   bullets: string[]
+  /** when set, the detail card's CTA opens WhatsApp with this message pre-filled instead of
+   *  scrolling to #contact — used for services worth a quick question first (e.g. group therapy) */
+  whatsappMessage?: string
 }
 
 export interface FaqEntry {
@@ -131,7 +136,7 @@ export const threadsUrl = 'https://www.threads.com/share/BAgSdZL8QI'
 export const translations: Record<Lang, TranslationStrings> = {
   ru: {
     navAbout: 'Обо мне', navServices: 'Услуги', navExperience: 'Опыт', navFaq: 'Вопросы', menuLabel: 'Меню', callBtn: 'Позвонить',
-    heroTag: 'Онлайн и очно в Дюссельдорфе',
+    heroTag: 'Онлайн или в Дюссельдорфе',
     heroTitle: 'Психолог и арт-терапевт',
     heroName: 'Рамина Колбая',
     heroLead: 'Пространство, где можно говорить о важном, разбираться в чувствах и находить опору — без оценок и спешки',
@@ -162,6 +167,8 @@ export const translations: Record<Lang, TranslationStrings> = {
     eduViewLabel: 'Посмотреть',
     servicesBadge: 'Форматы и стоимость', servicesTitle: 'Услуги и стоимость',
     servicesLead: 'Несколько форматов встреч под разные задачи. Выберите вариант слева, чтобы увидеть подробности.',
+    servicesCta: 'Записаться',
+    servicesCtaMore: 'Узнать больше',
     free: 'Бесплатно',
     processBadge: 'Процесс', processTitle: 'Что происходит на встречах',
     processLead: 'От первой бесплатной встречи до самостоятельного движения',
@@ -218,6 +225,8 @@ export const translations: Record<Lang, TranslationStrings> = {
     eduViewLabel: 'Переглянути',
     servicesBadge: 'Формати та вартість', servicesTitle: 'Послуги та вартість',
     servicesLead: 'Кілька форматів зустрічей під різні задачі. Оберіть варіант зліва, щоб побачити подробиці.',
+    servicesCta: 'Записатися',
+    servicesCtaMore: 'Дізнатися більше',
     free: 'Безкоштовно',
     processBadge: 'Процес', processTitle: 'Що відбувається на зустрічах',
     processLead: 'Від першої безкоштовної зустрічі до самостійного руху',
@@ -274,6 +283,8 @@ export const translations: Record<Lang, TranslationStrings> = {
     eduViewLabel: 'Ansehen',
     servicesBadge: 'Angebote und Preise', servicesTitle: 'Leistungen und Preise',
     servicesLead: 'Verschiedene Gesprächsformate für unterschiedliche Anliegen. Wählen Sie links eine Option, um Details zu sehen.',
+    servicesCta: 'Termin buchen',
+    servicesCtaMore: 'Mehr erfahren',
     free: 'Kostenlos',
     processBadge: 'Ablauf', processTitle: 'Was in den Sitzungen passiert',
     processLead: 'Vom ersten kostenlosen Gespräch bis zum eigenständigen Weg',
@@ -368,21 +379,21 @@ export const services: Record<Lang, ServiceEntry[]> = {
     { name: 'Консультация для взрослых', dur: '40–45 минут', priceEUR: 40, unit: '/встреча', desc: 'Индивидуальная работа с запросом взрослого человека — в удобном темпе и без оценок.', bullets: ['Индивидуальный формат', 'Онлайн или очно', 'Конфиденциально', 'Гибкое расписание'] },
     { name: 'Консультация для подростков', dur: '40–45 минут', priceEUR: 40, unit: '/встреча', desc: 'Пространство для подростка, где его слышат и не торопят с ответами.', bullets: ['Бережный темп', 'Учитываем возрастные особенности', 'При необходимости — с участием родителя', 'Онлайн или очно'] },
     { name: 'Консультация для детей 5–8 лет', dur: 'до 25 минут, с элементами арт-терапии', priceEUR: 25, unit: '/встреча', desc: 'Работа через игру и творчество — там, где словами говорить пока сложно.', bullets: ['Арт-терапевтические техники', 'Короткий, комфортный формат', 'Работа через творчество', 'Очно в кабинете'] },
-    { name: 'Групповая терапия для взрослых', dur: '4 встречи по 2 часа', priceEUR: 90, unit: '/курс', desc: 'Поддерживающая группа, где можно почувствовать, что вы не одни.', bullets: ['4 встречи по 2 часа', 'Поддерживающее сообщество', 'Онлайн или очно', 'Ограниченный размер группы'] },
+    { name: 'Групповая терапия для взрослых', dur: '4 встречи по 2 часа', priceEUR: 90, unit: '/курс', desc: 'Поддерживающая группа, где можно почувствовать, что вы не одни.', bullets: ['4 встречи по 2 часа', 'Поддерживающее сообщество', 'Онлайн или очно', 'Ограниченный размер группы'], whatsappMessage: 'Здравствуйте! Расскажите про групповую терапию подробнее' },
   ],
   ua: [
     { name: 'Знайомство', dur: '15 хвилин', priceEUR: null, unit: '', desc: 'Зазвичай достатньо 15 хвилин. Просто щоб познайомитися, обговорити ваш запит і зрозуміти, чи підходимо ми одне одному', bullets: ["Бережне знайомство без зобов'язань", 'Обговорення запиту та очікувань', 'Відповіді на запитання про формат роботи', 'Онлайн або очно в кабінеті'] },
     { name: 'Консультація для дорослих', dur: '40–45 хвилин', priceEUR: 40, unit: '/зустріч', desc: 'Індивідуальна робота із запитом дорослої людини — у комфортному темпі й без оцінок.', bullets: ['Індивідуальний формат', 'Онлайн або очно', 'Конфіденційно', 'Гнучкий розклад'] },
     { name: 'Консультація для підлітків', dur: '40–45 хвилин', priceEUR: 40, unit: '/зустріч', desc: 'Простір для підлітка, де його чують і не поспішають з відповідями.', bullets: ['Бережний темп', 'Враховуємо вікові особливості', 'За потреби — з участю батьків', 'Онлайн або очно'] },
     { name: 'Консультація для дітей 5–8 років', dur: 'до 25 хвилин, з елементами арттерапії', priceEUR: 25, unit: '/зустріч', desc: 'Робота через гру та творчість — там, де словами говорити ще складно.', bullets: ['Арттерапевтичні техніки', 'Короткий, комфортний формат', 'Робота через творчість', 'Очно в кабінеті'] },
-    { name: 'Групова терапія для дорослих', dur: '4 зустрічі по 2 години', priceEUR: 90, unit: '/курс', desc: 'Підтримувальна група, де можна відчути, що ви не одні.', bullets: ['4 зустрічі по 2 години', 'Підтримувальна спільнота', 'Онлайн або очно', 'Обмежений розмір групи'] },
+    { name: 'Групова терапія для дорослих', dur: '4 зустрічі по 2 години', priceEUR: 90, unit: '/курс', desc: 'Підтримувальна група, де можна відчути, що ви не одні.', bullets: ['4 зустрічі по 2 години', 'Підтримувальна спільнота', 'Онлайн або очно', 'Обмежений розмір групи'], whatsappMessage: 'Доброго дня! Розкажіть, будь ласка, детальніше про групову терапію' },
   ],
   de: [
     { name: 'Kennenlernen', dur: '15 Minuten', priceEUR: null, unit: '', desc: 'In der Regel reichen 15 Minuten, um sich kennenzulernen, Ihr Anliegen zu besprechen und zu spüren, ob die Zusammenarbeit passt', bullets: ['Behutsames Kennenlernen ohne Verpflichtung', 'Besprechung von Anliegen und Erwartungen', 'Antworten auf Fragen zum Arbeitsformat', 'Online oder persönlich in der Praxis'] },
     { name: 'Beratung für Erwachsene', dur: '40–45 Minuten', priceEUR: 40, unit: '/Sitzung', desc: 'Individuelle Arbeit mit dem Anliegen eines Erwachsenen — im eigenen Tempo und ohne Bewertung.', bullets: ['Individuelles Format', 'Online oder persönlich', 'Vertraulich', 'Flexible Terminplanung'] },
     { name: 'Beratung für Jugendliche', dur: '40–45 Minuten', priceEUR: 40, unit: '/Sitzung', desc: 'Ein Raum für Jugendliche, in dem sie gehört werden und niemand sie zu Antworten drängt.', bullets: ['Behutsames Tempo', 'Altersgerechtes Vorgehen', 'Bei Bedarf mit Einbeziehung der Eltern', 'Online oder persönlich'] },
     { name: 'Beratung für Kinder 5–8 Jahre', dur: 'bis zu 25 Minuten, mit Elementen der Kunsttherapie', priceEUR: 25, unit: '/Sitzung', desc: 'Arbeit durch Spiel und Kreativität — dort, wo Worte noch schwerfallen.', bullets: ['Kunsttherapeutische Techniken', 'Kurzes, angenehmes Format', 'Arbeit durch Kreativität', 'Persönlich in der Praxis'] },
-    { name: 'Gruppentherapie für Erwachsene', dur: '4 Termine à 2 Stunden', priceEUR: 90, unit: '/Kurs', desc: 'Eine unterstützende Gruppe, in der Sie spüren können, dass Sie nicht allein sind.', bullets: ['4 Termine à 2 Stunden', 'Unterstützende Gemeinschaft', 'Online oder persönlich', 'Begrenzte Gruppengröße'] },
+    { name: 'Gruppentherapie für Erwachsene', dur: '4 Termine à 2 Stunden', priceEUR: 90, unit: '/Kurs', desc: 'Eine unterstützende Gruppe, in der Sie spüren können, dass Sie nicht allein sind.', bullets: ['4 Termine à 2 Stunden', 'Unterstützende Gemeinschaft', 'Online oder persönlich', 'Begrenzte Gruppengröße'], whatsappMessage: 'Hallo! Erzählen Sie mir bitte mehr über die Gruppentherapie' },
   ],
 }
 

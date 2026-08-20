@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Accordion } from 'radix-ui'
 import { ChevronDown } from 'lucide-react'
-import officePhoto from '../assets/ramina-office.png'
-import sessionPhoto from '../assets/ramina-session.png'
+import officePhoto from '../assets/ramina-office.jpg'
+import sessionPhoto from '../assets/ramina-session.jpg'
 import videoCallPhoto from '../assets/ramina-video-call.png'
-import { translations, type Lang } from '../i18n/content'
+import { translations, whatsappUrl, type Lang } from '../i18n/content'
 
 interface ProcessProps {
   lang: Lang
@@ -78,7 +78,12 @@ export function Process({ lang }: ProcessProps) {
                   <div className="process__row-body">
                     <p>{step.body}</p>
                     {i === 0 && (
-                      <a href="#contact" className="process__row-cta">
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="process__row-cta"
+                      >
                         {t.p1Cta}
                       </a>
                     )}
