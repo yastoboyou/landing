@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yastoboyou.de/sitemap.xml
+Sitemap: https://www.yastoboyou.de/sitemap.xml
