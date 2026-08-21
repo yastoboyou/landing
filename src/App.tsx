@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import type { Lang } from './i18n/content'
+import { languages, type Lang } from './i18n/content'
 import { Header } from './sections/Header'
 import { Hero } from './sections/Hero'
 import { About } from './sections/About'
@@ -15,8 +15,15 @@ import { Contact } from './sections/Contact'
 import { Footer } from './sections/Footer'
 import { FloatingCallButton } from './sections/FloatingCallButton'
 
+/** Lets a shared link force a starting language via ?lang=de, e.g. for portfolio links —
+ *  falls back to the default (ru) when the param is missing or not one of ru/ua/de. */
+function getInitialLang(): Lang {
+  const param = new URLSearchParams(window.location.search).get('lang')
+  return (languages as string[]).includes(param ?? '') ? (param as Lang) : 'ru'
+}
+
 function App() {
-  const [lang, setLang] = useState<Lang>('ru')
+  const [lang, setLang] = useState<Lang>(getInitialLang)
 
   return (
     <>
