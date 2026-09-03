@@ -3,7 +3,7 @@ import { Accordion } from 'radix-ui'
 import { ChevronDown } from 'lucide-react'
 import officePhoto from '../assets/ramina-office.jpg'
 import sessionPhoto from '../assets/ramina-session.jpg'
-import videoCallPhoto from '../assets/ramina-video-call.png'
+import videoCallPhoto from '../assets/ramina-video-call.jpg'
 import { translations, whatsappUrl, type Lang } from '../i18n/content'
 
 interface ProcessProps {
