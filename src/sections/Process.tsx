@@ -10,7 +10,7 @@ interface ProcessProps {
   lang: Lang
 }
 
-const photos = [officePhoto, sessionPhoto, videoCallPhoto]
+const photos = [videoCallPhoto, officePhoto, sessionPhoto]
 
 export function Process({ lang }: ProcessProps) {
   const t = translations[lang]
